@@ -1,0 +1,58 @@
+
+Эйфлория, захват зон
+Крестики против ромбиков
+
+ограничение зоны. не выходят за пределы
+движение по другому принципу
+
+размер, толщина, скорость
+
+switch(SHAPE) {
+
+      case FlyShape.CROSS:
+        Path path = Path()
+          ..moveTo(_x - _size / 2, _y)
+          ..lineTo(_x + _size / 2, _y)
+          ..moveTo(_x, _y - _size / 2)
+          ..lineTo(_x, _y + _size / 2)
+          ..close();
+        canvas.drawPath(path, _paint);
+        break;
+
+      case FlyShape.RECTANGLE:
+        Offset position = Offset(_x, _y);
+        Rect rect = Rect.fromCircle(center: position, radius: _size);
+        canvas.drawRect(rect, _paint);
+        break;
+
+      case FlyShape.CIRCLE:
+        Offset position = Offset(_x, _y);
+        canvas.drawCircle(position, _size, _paint);
+        break;
+
+      case FlyShape.TRIANGLE:
+        var path = Path();
+        path.moveTo(_x, _y - _size / 3);
+        path.lineTo(_x + _size / 2, _y + _size / 2);
+        path.lineTo(_x - _size / 2, _y + _size / 2);
+        path.close();
+        canvas.drawPath(path, _paint);
+        break;
+
+        ---
+
+        var horizontalDirection = _random.nextBool() ? 1 : -1;
+            var verticalDirection = _random.nextBool() ? 1 : -1;
+            var dx = SPEED * horizontalDirection;
+            var dy = SPEED * verticalDirection;
+            _x += dx;
+            _y += dy;
+
+
+  static const int SPEED = 2;
+  static const FlyShape SHAPE = FlyShape.CROSS;
+  static const List<int> COLORS = [
+    0xFFF44336, 0xFFe91e63, 0xFF9C27B0, 0xFF673AB7,
+    0xFF3F51B5, 0xFF2196F3, 0xFF03A9F4, 0xFF00BCD4, 0xFF009688,
+    0xFF4CAF50, 0xFF8BC34A, 0xFFFF9800, 0xFFFF5722, 0xFF607D8B
+  ];

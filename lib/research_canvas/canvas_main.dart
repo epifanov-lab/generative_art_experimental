@@ -1,11 +1,15 @@
+import 'package:flame/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'screens/exp_1.dart';
-import 'screens/exp_2.dart';
-import 'screens/exp_3.dart';
-import 'screens/exp_4.dart';
+import 'exp_4.dart';
 
-void main() => runApp(GenerativeLabApp());
+void main() async {
+  runApp(GenerativeLabApp());
+  Util flameUtil = Util();
+  await flameUtil.fullScreen();
+  await flameUtil.setOrientation(DeviceOrientation.portraitUp);
+}
 
 class GenerativeLabApp extends StatelessWidget {
   @override

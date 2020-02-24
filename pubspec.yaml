@@ -1,11 +1,12 @@
 name: generative_arts_1
-description: Experimental web app with some crazy stuf
+description: Experimental app
 version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flame: ^0.18.1
   flutter:
     sdk: flutter
 
