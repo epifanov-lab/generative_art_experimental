@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:generative_arts_1/research_flame/flies_1/flies/fly_alpha.dart';
 
-import 'flies/base_fly.dart';
+import 'flies/fly_base.dart';
+import 'flies/impl/fly_impl_2.dart';
 
 class FlameEngine extends Game {
-  Size screenSize;
+  static Size screenSize;
   List<Fly> _list = List();
 
   FlameEngine() {
@@ -34,9 +34,11 @@ class FlameEngine extends Game {
   void resize(Size size) => screenSize = size;
 
   void onTapDown(TapDownDetails d) {
-    print('TAP: ${d.globalPosition}');
+    print('SPAWN: ${d.globalPosition}');
     Offset pos = d.globalPosition;
-    _list.add(FlyAlpha.random(screenSize, x: pos.dx, y: pos.dy));
+    _list.add(Fly2.random(x: pos.dx, y: pos.dy));
   }
+
+
 
 }

@@ -1,9 +1,8 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'research_flame/flies_1/flies/base_fly.dart';
+import 'research_flame/flies_1/flies/fly_utils.dart';
 
 class Utils {
 
