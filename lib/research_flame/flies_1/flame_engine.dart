@@ -8,7 +8,6 @@ import 'package:generative_arts_1/research_flame/flies_1/flies/fly_alpha.dart';
 import 'flies/base_fly.dart';
 
 class FlameEngine extends Game {
-
   Size screenSize;
   List<Fly> _list = List();
 
@@ -18,7 +17,7 @@ class FlameEngine extends Game {
 
   void initialize() async {
     resize(await Flame.util.initialDimensions());
-    _list.addAll(FlyAlpha.spawn(100, screenSize));
+    //_list.addAll(FlyAlpha.spawn(100, screenSize));
   }
 
   void render(Canvas canvas) {
@@ -30,11 +29,14 @@ class FlameEngine extends Game {
     _list.forEach((fly) => fly.render(canvas));
   }
 
-  void update(double t) {
-    _list.forEach((fly) => fly.update(t));
+  void update(double t) => _list.forEach((fly) => fly.update(t));
+
+  void resize(Size size) => screenSize = size;
+
+  void onTapDown(TapDownDetails d) {
+    print('TAP: ${d.globalPosition}');
+    Offset pos = d.globalPosition;
+    _list.add(FlyAlpha.random(screenSize, x: pos.dx, y: pos.dy));
   }
 
-  void resize(Size size) {
-    screenSize = size;
-  }
 }
