@@ -25,6 +25,17 @@ class Movement {
     Direction.SE: [Direction.S, Direction.SE, Direction.E]
   };
 
+  static Map<Direction, Direction> oppositeDirs = {
+    Direction.NW: Direction.SE,
+    Direction.N: Direction.S,
+    Direction.NE: Direction.SW,
+    Direction.W: Direction.E,
+    Direction.E: Direction.W,
+    Direction.SW: Direction.NE,
+    Direction.S: Direction.N,
+    Direction.SE: Direction.NW
+  };
+
   final Direction direction;
   final int speed;
   final Position vector;
@@ -38,7 +49,11 @@ class Movement {
   Movement.closest(Direction to, int where, int speed)
       : this(getClosestDir(to, where), speed);
 
+  Movement.opposite(Direction to, int speed)
+      : this(getOppositeDir(to), speed);
+
   Movement.idle() : this(Direction.N, 0);
+
 
   static Position calculate(Direction direction, int speed) {
     Position dir = directions[direction.index];
@@ -52,6 +67,8 @@ class Movement {
   static Direction getClosestDir(Direction direction, int where) {
     return closestDirs[direction][1 + where];
   }
+
+  static Direction getOppositeDir(Direction to) => oppositeDirs[to];
 
   @override
   String toString() {

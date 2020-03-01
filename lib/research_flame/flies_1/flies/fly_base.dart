@@ -9,8 +9,6 @@ import 'package:generative_arts_1/research_flame/flies_1/flies/game_object.dart'
 import '../../../utils.dart';
 import 'fly_utils.dart';
 
-enum FlyShape { CROSS, RECTANGLE, CIRCLE, TRIANGLE }
-
 abstract class Fly extends GameObject with Behavior {
 
   static const int MIN_SPEED = 1;
@@ -22,37 +20,28 @@ abstract class Fly extends GameObject with Behavior {
   final int speed;
 
   final Color color;
-  final Paint paint;
 
   final bool isRandom;
 
-  Fly(double x, double y, double size, this.speed, this.color, { bool isRandom })
-      : isRandom = isRandom ??= false, paint = Paint()..color = color, super(x, y, size) {
+  Fly(ObjectsShape shape, double size, double x, double y, this.speed, this.color, { bool isRandom })
+      : isRandom = isRandom ??= false, super(shape, size, x, y) {
+        paint.color = color;
         initialize();
   }
 
   Fly.random(List<Color> colors,
-             {double x, double y, double size, int speed, Color color})
+             {ObjectsShape shape, double size, double x, double y, int speed, Color color})
       : this(
+      shape ?? ObjectsShape.CROSS,
+      size ?? MIN_SIZE + RANDOM.nextDouble() * (MAX_SIZE - MIN_SIZE),
       x ?? RANDOM.nextDouble() * FlameEngine.screenSize.width,
       y ?? RANDOM.nextDouble() * FlameEngine.screenSize.height,
-      size ?? MIN_SIZE + RANDOM.nextDouble() * (MAX_SIZE - MIN_SIZE),
       speed ?? MIN_SPEED + RANDOM.nextInt(MAX_SPEED - MIN_SPEED),
       color ?? Utils.getRandomColor(colors: colors),
       isRandom: true
   );
 
-  Fly.copy(Fly other) : this(other.x, other.y, other.size, other.speed, other.color);
-
-  void initialize();
-
-  void render(Canvas canvas);
-
-  void update(double t);
-
-  void onTapDown() {
-    // TODO implement
-  }
+  Fly.copy(Fly other) : this(other.shape, other.size, other.x, other.y, other.speed, other.color);
 
   @override
   String toString() {

@@ -70,3 +70,18 @@ switch(SHAPE) {
     if (FlyUtils.checkLRBounds(fly.space, fly.size, tx)) fly.x = tx;
     if (FlyUtils.checkTBBounds(fly.space, fly.size, ty)) fly.y = ty;
 
+  static const List<Color> COLORS = [
+    Colors.red,
+    Colors.redAccent,
+    Colors.deepOrange,
+    Colors.deepOrangeAccent,
+    Colors.orange,
+    Colors.orangeAccent
+  ];
+
+    static const List<Color> COLORS = [
+      Color.fromARGB(255, 255, 255, 255),
+      Color.fromARGB(255, 166, 255, 255),
+      Color.fromARGB(255, 255, 166, 255),
+      Color.fromARGB(255, 255, 255, 166)
+    ];
